@@ -4,6 +4,7 @@ import co.touchlab.stately.concurrency.AtomicReference
 
 interface Analytics {
     fun sendEvent(eventName: String, eventArgs: Map<String, Any>)
+    fun moreFun(for: String)
 }
 
 fun initAnalytics(analytics: Analytics): AnalyticsHandle {
@@ -25,6 +26,10 @@ data class AnalyticsHandle(
 
 internal fun sendEvent(name: String, vararg args: Pair<String, Any>) {
     AnalyticsHandler.analyticsAtom.get()!!.sendEvent(name, args.toMap())
+}
+
+fun moreFun(for: String) {
+    // nothing to see here
 }
 
 internal object AnalyticsHandler {
