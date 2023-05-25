@@ -4,7 +4,7 @@ import co.touchlab.stately.concurrency.AtomicReference
 
 interface Analytics {
     fun sendEvent(eventName: String, eventArgs: Map<String, Any>)
-    fun moreFun(for: String)
+    fun moreFun(with: String)
 }
 
 fun initAnalytics(analytics: Analytics): AnalyticsHandle {
@@ -28,7 +28,7 @@ internal fun sendEvent(name: String, vararg args: Pair<String, Any>) {
     AnalyticsHandler.analyticsAtom.get()!!.sendEvent(name, args.toMap())
 }
 
-fun moreFun(for: String) {
+fun moreFun(with: String) {
     // nothing to see here
 }
 
