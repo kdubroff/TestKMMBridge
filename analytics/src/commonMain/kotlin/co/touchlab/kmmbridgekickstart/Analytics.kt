@@ -5,9 +5,6 @@ import co.touchlab.stately.concurrency.AtomicReference
 interface Analytics {
     fun sendEvent(eventName: String, eventArgs: Map<String, Any>)
     fun moreFun(with: String)
-    fun sendEvent(name: String, vararg args: Pair<String, Any>) {
-        AnalyticsHandler.analyticsAtom.get()!!.sendEvent(name, args.toMap())
-    }
 }
 
 fun initAnalytics(analytics: Analytics): AnalyticsHandle {
@@ -26,6 +23,14 @@ data class AnalyticsHandle(
     val breedAnalytics: BreedAnalytics,
     val httpClientAnalytics: HttpClientAnalytics
 )
+abstract class DefaultAnalytics : Analytics {
+    override fun sendEvent(name: String, eventArgs: Map<String, Any>) {
+        AnalyticsHandler.analyticsAtom.get()!!.sendEvent(name, eventArgs.toMap())
+    }
+}
+internal fun sendEvent(name: String, vararg args: Pair<String, Any>) {
+    AnalyticsHandler.analyticsAtom.get()!!.sendEvent(name, args.toMap())
+}
 
 fun moreFun(with: String) {
     // nothing to see here
