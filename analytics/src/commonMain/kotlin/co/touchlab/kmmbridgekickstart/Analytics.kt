@@ -24,8 +24,8 @@ data class AnalyticsHandle(
     val httpClientAnalytics: HttpClientAnalytics
 )
 abstract class DefaultAnalytics : Analytics {
-    override fun sendEvent(name: String, eventArgs: Map<String, Any>) {
-        AnalyticsHandler.analyticsAtom.get()!!.sendEvent(name, eventArgs.toMap())
+    override fun sendEvent(eventName: String, eventArgs: Map<String, Any>) {
+        AnalyticsHandler.analyticsAtom.get()!!.sendEvent(eventName, eventArgs.toMap())
     }
 }
 internal fun sendEvent(name: String, vararg args: Pair<String, Any>) {
